@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>reveal.js</title>
+
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/beige.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <h2>OAuth</h2>
+        <p>
+          OAuth stands for Open Authorization
+        </p>
+        <img width="150" height="150" src="https://myrusakov.ru/images/articles/oauth2-tutorial-part-1.png" alt="">
+      </section>
+      <section>
+        <img width="550" height="450" src="https://images.slideplayer.com/14/4495257/slides/slide_2.jpg"
+          alt="http basic Authentication">
+      </section>
+      <section>
+        <img width="700" height="550"
+          data-src="https://developer.okta.com/assets-jekyll/blog/oauth/biketoworkday-fb-login-f00e39aabbf3e44bc3570333643cbf5d966fc27367dbffd2623ff4a3694831c3.png"
+          alt="oauth login">
+      </section>
+      <section>
+        <h2>OAuth versions</h2>
+        <ul>
+          <li>OAuth 1.0a</li>
+          <li><b>OAuth 2.0</b></li>
+        </ul>
+      </section>
+      <section>
+        <h2>OAuth process</h2>
+        <section>
+          <p>1. App requests authorization from User</p>
+        </section>
+        <section>
+          <p> 2. User authorizes App and delivers proof</p>
+        </section>
+        <section>
+          <p>3. App presents proof of authorization to server</p>
+        </section>
+        <section>
+          <p> 4. Token can only access what the User authorized for the App</p>
+        </section>
+      </section>
+      <section>
+        <h2>OAuth Central Components</h2>
+        <section>
+          <h2>Scopes and Consent</h2>
+        </section>
+        <section>
+          <h2>Actors</h2>
+        </section>
+        <section>
+          <h2>Clients</h2>
+        </section>
+        <section>
+          <h2>Tokens</h2>
+        </section>
+        <section>
+          <h2>Authorization Server</h2>
+        </section>
+        <section>
+          <h2>Flows</h2>
+        </section>
+      </section>
+      <section>
+        <h2>OAuth Scopes</h2>
+        <img width="600" height="500"
+          src="https://developer.okta.com/assets-jekyll/blog/oauth/oauth-scopes-7ea53a0efe6c05a8113671297f641baae7486dfb6ab8b8357c74cb6e6f8371ce.png"
+          alt="oauth scopes">
+      </section>
+
+      <section>
+        <h2>OAuth Actors</h2>
+        <section>Resource Owner</section>
+        <section>Resource Server</section>
+        <section>Client</section>
+        <section>Authorization Server</section>
+      </section>
+      <section>
+        <h2>Resource Owner</h2>
+        <ul>
+          <li>End user</li>
+          <li>Company</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Clients</h2>
+        <img
+          src="https://developer.okta.com/assets-jekyll/blog/oauth/oauth-clients-93fc6cc8e83fa7d885c9daa0ed88007fc44780b99682dcfa580af319894870c7.png"
+          alt="">
+      </section>
+      <section>
+        <h2>OAuth Tokens</h2>
+        <section>
+          <ul>
+            <li>Access tokens</li>
+            <li>Refresh tokens</li>
+          </ul>
+        </section>
+        <section>
+          <p>
+            JSON Web Tokens
+          </p>
+        </section>
+        <section>
+          <img width="750" height="450"
+            src="https://developer.okta.com/assets-jekyll/blog/oauth/authorization-server-99a4ad01368a4c8e407917358d4394d573a6c0e3c9fa10c01a59d1a54c4938cf.png"
+            alt="oauth tokens">
+        </section>
+      </section>
+
+      <section>
+        <h4>How do we pass the tokens <br>to a resource server?</h4>
+        <section>
+          <ul>
+            <li>Front channel</li>
+            <li>Back channel</li>
+          </ul>
+        </section>
+        <section>
+          <img
+            src="https://developer.okta.com/assets-jekyll/blog/oauth/flow-channels-5d8996b3706cab1e4ac8f9ed716d6529d3970f91cbc3cb5ff5a21a94389d0e1d.png"
+            alt="front and back channels">
+        </section>
+      </section>
+      <section>
+        <h2>Front channel use example</h2>
+        <section>
+          <img width="450" height="450"
+            src="https://developer.okta.com/assets-jekyll/blog/oauth/front-channel-flow-4eb727aa0e67884935dd1642749fac60a7194815b8a1724aa11a0ce9adb80fa1.png"
+            alt="Front channel">
+        </section>
+        <section data-auto-animate>
+          <pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+		  GET 
+    https://accounts.google.com/o/oauth2/auth?scope=gmail.insert <span class="fragment highlight-blue">gmail.send</span>
+    &redirect_uri=https://app.example.com/oauth2/callback
+    &response_type=code&client_id=812741506391
+    &state=af0ifjsldkj
+					</code></pre>
+        </section>
+        <section>
+          <p>GET
+            https://accounts.google.com/o/oauth2/auth?scope=<span class="fragment highlight-blue">gmail.insert</span>
+            <span class="fragment highlight-blue">gmail.send</span>
+          </p>
+        </section>
+        <section>
+          <p><span class="fragment highlight-blue">&redirect_uri</span>=https://app.example.com/oauth2/callback
+          </p>
+        </section>
+        <section>
+          <p><span class="fragment highlight-blue">&response_type</span>=code&client_id=812741506391
+          </p>
+        </section>
+        <section>
+          <p><span class="fragment highlight-blue">&state</span>=af0ifjsldkj
+          </p>
+        </section>
+      </section>
+      <section data-auto-animate>
+        <h2 data-id="code-title"> Response </h2>
+        <pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+         
+          HTTP/1.1 302 Found
+          Location: https://app.example.com/oauth2/callback?
+          code=MsCeLvIaQm6bTrgtp7&state=af0ifjsldkj
+        </code></pre>
+      </section>
+      <section>
+        <h2>Thanks for watching!</h2>
+      </section>
+    </div>
+  </div>
+  https://www.bairbie.me/result/2b8f72a0-8e5c-4c34-be01-67665f3925e6
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      hash: true,
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+  </script>
+</body>
+
+</html>
